@@ -1,3 +1,5 @@
+//NOTE LENT --->
+
 const {Client, Intents} = require('discord.js');
 const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]});
 const guild = client.guilds.cache.get(331376399950544898);
@@ -11,11 +13,13 @@ client.on('message', async message => {
     //bot menü
     if (message.content === '!thomashelp') {
         message.channel.send(
-                'Jelenleg elérhető parancsok' + '\n' + '\n'
-                + '- !thomashelp = Segítség kérés' + '\n'
-                + '- !thomasoltás = Thomas beszól neked valamit.' + '\n'
-                + '- !hullámvasút @username = Felültetsz vele valakit a Thomasra.' + '\n'
-                + '- !tsound "effect_száma" = Lejátszasz egy hang effectet! effectek listájához írd be a "!tsoundlist"-parancsot!');
+                'Jelenleg elérhető parancsok : ' + '\n' + '\n'
+                + '- !thomashelp  =  Segítség kérés.' + '\n'
+                + '- !thomasoltás  =  Thomas beszól neked valamit.' + '\n'
+                + '- !hullámvasút @username  =  Felültetsz vele valakit a Thomasra.' + '\n'
+                + '- !tsoundlist  =  előhozza a jelenleg elérhető hangeffecteket.'+'\n'
+                + '- !tsound "effect_száma"  =  Lejátszasz egy hang effectet.'+'\n'
+                + '- !taranyköpés  =  Random aranyköpést küld neked a bot.');
     }
     // Inaktív
     if (message.content === '!thomasoltás') {
@@ -47,7 +51,7 @@ client.on('message', async message => {
     }
     // emberek mozgatása !hullámvasút @username
     var args = message.content.split(' ');
-    if (args[0] == '!hullámvasút') {
+    if (args[0] === '!hullámvasút') {
         const muteduser = message.mentions.members.first();
         const defaultchannel = muteduser.voice.channel;
         if (muteduser.voice.selfMute || muteduser.voice.serverDeaf) {
@@ -80,7 +84,28 @@ client.on('message', async message => {
 
 
 
-var token1 = "ODMwNzUzMzY0NDY2OTkxMTI1";
-var token2 = ".YHLRXA.uW9HxaFqJ0GC-";
-var token3 = "exAfzPAW-fWz5Y";
-client.login(token1 + token2 + token3);
+
+client.login("TOKEN");
+
+//--------------------------------------------
+//OFFICAL BOT! V1.0
+//STATUS = READY TO START
+//ÁLLAPOT PRIVÁT!
+//PUBLIC VERZÓ VÁRHATÓAN 3 - 4 HÓNAP
+//
+//VERZIÓK: 
+//      NODE.JS 14.+
+//      EREREE.JS 14.+
+//      DISCORD.JS 14.+
+//--------------------------------------------
+/*
+Fejlesztésre vár:
+-soud effect
+-moderátor
+-menü GUI
+-spam bug fix
+-infinite loop bug fix
+-Ranghoz kötés
+-random aranyköpés
+ */
+//--------------------------------------------
