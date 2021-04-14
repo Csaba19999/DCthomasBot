@@ -96,7 +96,8 @@ client.on('message', async message => {
 
 
 
-client.login(token1 + token2 + token3);
+//previus token is regenerated.
+client.login("Bot token");
 
 //--------------------------------------------
 //OFFICAL BOT! V1.0
@@ -116,7 +117,7 @@ client.login(token1 + token2 + token3);
 TO DO:
 -soud effect
 -moderátor
--menü GUI
+-menü GUI 
 -spam bug fix
 -Ranghoz kötés
 -random aranyköpés
@@ -124,5 +125,6 @@ TO DO:
 -időzítő finom hangolása + 1 szoba
 -user left the voice channels hiba javitása
 -errorok minimalizálása.
+-tartalom bővítés
  */
 //--------------------------------------------
