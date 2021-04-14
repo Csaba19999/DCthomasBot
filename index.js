@@ -19,9 +19,19 @@ client.on('message', async message => {
                 + '- !hullámvasút @username  =  Felültetsz vele valakit a Thomasra.' + '\n'
                 + '- !tsoundlist  =  előhozza a jelenleg elérhető hangeffecteket.'+'\n'
                 + '- !tsound "effect_száma"  =  Lejátszasz egy hang effectet.'+'\n'
-                + '- !taranyköpés  =  Random aranyköpést küld neked a bot.');
+                + '- !taranyköpés  =  Random aranyköpést küld neked a bot.'+'\n'
+                + '- !kifogás  =  Dob egy random kifogást hogy kihúzd magad a pácból.');
     }
     // Inaktív
+    if (message.content === '!kifogás') {
+        const oltasok = [
+            "-------------------------------------------------------------- \n Fent marasztottatok 2-ig, és ezért nem tudok játszani. \n --------------------------------------------------------------",
+            "------------------------------------------------------- \n Nem látok semmit, meg kell mosnom az arcom. \n -------------------------------------------------------"
+        ];
+        var kifR = Math.floor(Math.random() * 2);
+        message.channel.send(oltasok[kifR] + "");
+    }
+    
     if (message.content === '!thomasoltás') {
         const oltasok = ["Mi kéne te fasz?",
             "Hadjá má lógva " + message.author.username + " baszod",
@@ -31,10 +41,11 @@ client.on('message', async message => {
             "Nem hiszem el hogy ennyire... áh.. ki se mondom.",
             "Egy verébnek több esze van mint neked!",
             message.author.username + " gyere vonatozni velünk te kis hombár homár.",
-            message.author.username + " Ki ez az ENBER?!",
+            message.author.username + " Ki ez az NBER?!",
             message.author.username + " -Szóljak anyádnak?",
-            message.author.username + " Anyád már tudja hogy buzi vagy?"];
-        var oltR = Math.floor(Math.random() * 11);
+            message.author.username + " Anyád már tudja hogy buzi vagy?",
+            "De az nem úgy van " + message.author.username + " istenem na , kérlek"];
+        var oltR = Math.floor(Math.random() * 12);
         message.channel.send(oltasok[oltR] + "");
     }
     // sound effect menü (inaktív)
@@ -85,7 +96,7 @@ client.on('message', async message => {
 
 
 
-client.login("TOKEN");
+client.login(token1 + token2 + token3);
 
 //--------------------------------------------
 //OFFICAL BOT! V1.0
@@ -97,15 +108,21 @@ client.login("TOKEN");
 //      NODE.JS 14.+
 //      EREREE.JS 14.+
 //      DISCORD.JS 14.+
+//HOST
+//      https://billing.plox.host/clientarea.php
+//      pass:50/70 A többi fejben
 //--------------------------------------------
 /*
-Fejlesztésre vár:
+TO DO:
 -soud effect
 -moderátor
 -menü GUI
 -spam bug fix
--infinite loop bug fix
 -Ranghoz kötés
 -random aranyköpés
+-kifogás kártya
+-időzítő finom hangolása + 1 szoba
+-user left the voice channels hiba javitása
+-errorok minimalizálása.
  */
 //--------------------------------------------
