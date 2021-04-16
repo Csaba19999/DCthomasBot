@@ -1,7 +1,7 @@
 module.exports = {
     name: 'command',
     description: "Embeds",
-    execute(message, args, Discord){
+    execute(message, args ,Discord){
         const newEmbed = new Discord.messageEmbed()
         .setColor('#59C7F6')
         .setTitle('Parancsok Thomashoz a gőzöshöz')

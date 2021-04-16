@@ -37,11 +37,11 @@ client.on('message', message => {
             name: '✅ !aranyköpés',
             value: 'Thomas Random aranyköpést küld neked.'
           }, {
-            name: '✅ !tkifogás',
+            name: '✅ !kifogás',
             value: 'Thomas ad neked egy random kifogást hogy kihúzd magadat a pácból.'
           }, {
-            name: '✅ !status',
-            value: 'Ellenörzöd Thomas állapotát.'
+            name: '✅ !tstatus',
+            value: 'Ellenörzöd Thomas állapotát. Ha nem kapsz választ az azt jelenti hogy offline van.'
           })
           .setTimestamp();
 
@@ -49,20 +49,28 @@ client.on('message', message => {
       }
     //-----------------------------------*KIFOGÁS*---------------------------------------
     if (message.content === '!kifogás') {
-        const oltasok = [
-            "Engem már nem érdekel az egész",
-            "Dani csak pofázik, csak pofázik folyamatosan",
-            "Reaction timeoztam",
-            "Szerintem azt hajnalban írtam, és már fáradt voltam",
-            "Ajj, de ez egy gold geci",
+        const kifogasok = [
+            "Engem már nem érdekel az egész!",
+            "Dani csak pofázik, csak pofázik folyamatosan!",
+            "Reaction timeoztam!",
+            "Szerintem azt hajnalban írtam, és már fáradt voltam.",
+            "Ajj, de ez egy gold geci !",
             "Én a diamondot lefosom, de ezek szilverek…",
             "Nem látok semmit, meg kell mosnom az arcom.",
             "Fent marasztottatok 2-ig, és ezért nem tudok játszani.",
             "De teljesen le van fagyva a kezem bazd meg."
         ];
-        var oltTH = oltasok.length;
-        var oltIndex = Math.floor(Math.random() * oltTH);
-        message.channel.send(oltasok[oltIndex]);
+
+        //KIIRATÁS
+        var kifogTH = kifogasok.length;
+        var kifogIndex = Math.floor(Math.random() * kifogTH);
+        const embedO = new Discord.MessageEmbed()
+          .setColor('#33ccff')
+          .addFields({
+            name: kifogasok[kifogIndex],
+            value: '‎‎'
+        })
+        message.channel.send(embedO);
     }
     //*******************************************0*****************************************
     //
@@ -70,7 +78,7 @@ client.on('message', message => {
     //
     //
     if (message.content === '!aranyköpés') {
-        const oltasok = [
+        const aranykopesek = [
             " Impactal lelő - Orange, 2020.09.29.",
             " Én most csapat ember leszek - Tibi, 2020.11.04",
             " Hogy nem lehet betalálni egy fél kilós gránáttal egy 120x120-as ablakon??? - Peki, dátum ismeretlen",
@@ -102,15 +110,24 @@ client.on('message', message => {
             " Tibi: Köszi hogy felszedtél <3. \n Tibi: (Le TK-zik random lövöldözés közben.)",
             " Dani:Miért nem úszik a víz a halban?"
         ];
-        var oltTH = oltasok.length;
-        var oltIndex = Math.floor(Math.random() * oltTH);
-        message.channel.send(oltasok[oltIndex]);
+
+        //KIIRATÁS
+        var aranyTH = aranykopesek.length;
+        var aranyIndex = Math.floor(Math.random() * aranyTH);
+        const embedU = new Discord.MessageEmbed()
+          .setColor('#33ccff')
+          .addFields({
+            name: aranykopesek[aranyIndex],
+            value: '‎‎'
+        })
+        message.channel.send(embedU);
+
     }
     //-------------------------------*STATUS*---------------------------------------------  
     if (message.content === '!tstatus') {
-        message.channel.send("Jelenlegi státusz : (ONLINE) 'Thomas működik!' .");
+        message.channel.send("Jelenlegi státusz : ONLINE' .");
         message.channel.send("Modulok : MISSING_CODE/" + "MISSING_CODE");
-        message.channel.send("REPORT : Ha a státusz : (ONLINE) akkor működik a bot. Ha mégse, vedd fel velem a kapcsolatot : Csaba1999#0767");
+        message.channel.send("REPORT : ( Ha a státusz : ONLINE akkor működik a bot. Ha mégse, vedd fel velem a kapcsolatot : Csaba1999#0767 )");
     }
     //************************************************************************************
     //
@@ -128,9 +145,19 @@ client.on('message', message => {
             message.author.username + " Ki ez az NBER?!",
             message.author.username + " -Szóljak anyádnak?",
             message.author.username + " Anyád már tudja hogy buzi vagy?",
-            "De az nem úgy van " + message.author.username + " istenem na , kérlek"];
-        var oltR = Math.floor(Math.random() * 12);
-        message.channel.send(oltasok[oltR] + "");
+            "De az nem úgy van " + message.author.username + " istenem na , kérlek"
+        ];
+
+        //KIIRATÁS
+        var oltTH = oltasok.length;
+        var oltIndex = Math.floor(Math.random() * oltTH);
+        const embedP = new Discord.MessageEmbed()
+            .setColor('#33ccff')
+            .addFields({
+            name: oltasok[oltIndex],
+            value: '‎‎'
+        })
+        message.channel.send(embedP);
     }
     //************************************************************************************
     //
@@ -205,10 +232,11 @@ console.log('Modulok : MISSING_CODE/MISSING_CODE');
 //VERZIÓK: 
 //      NODE.JS 14.+
 //      EREREE.JS 14.+
-//      DISCORD.JS 14.+
+//      DISCORD.JS 12.+
 //HOST
 //      https://billing.plox.host/clientarea.php
 //      pass:50/70 A többi fejben
+//      https://discord.com/api/oauth2/authorize?client_id=830753364466991125&permissions=4294966704&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
 //--------------------------------------------
 /*
 TO DO:
