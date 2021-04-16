@@ -1,3 +1,0 @@
-function inner() {
-    var private;
-};

@@ -1,1 +1,0 @@
-const async = 1;

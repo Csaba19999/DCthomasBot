@@ -1,1 +1,0 @@
-f = () => { for await (x of xs); }

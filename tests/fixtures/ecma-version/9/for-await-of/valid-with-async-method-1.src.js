@@ -1,1 +1,0 @@
-obj = { async f() { for await (x of xs); } }

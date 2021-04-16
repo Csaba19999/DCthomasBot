@@ -1,1 +1,0 @@
-let {...obj1,...obj2} = foo

@@ -1,38 +1,122 @@
-//NOTE LENT --->
-
-const {Client, Intents} = require('discord.js');
-const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]});
-const guild = client.guilds.cache.get(331376399950544898);
+﻿
+const Discord = require('discord.js');
+const client = new Discord.Client();
+const { Client, CategoryChannel, MessageEmbed } = require("discord.js")
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-
 });
-client.on('message', async message => {
+client.on('message', message => {
 
-    //bot menü
+
+    //----------------------------------*HELP*--------------------------------------------  
     if (message.content === '!thomashelp') {
-        message.channel.send(
-                'Jelenleg elérhető parancsok : ' + '\n' + '\n'
-                + '- !thomashelp  =  Segítség kérés.' + '\n'
-                + '- !thomasoltás  =  Thomas beszól neked valamit.' + '\n'
-                + '- !hullámvasút @username  =  Felültetsz vele valakit a Thomasra.' + '\n'
-                + '- !tsoundlist  =  előhozza a jelenleg elérhető hangeffecteket.'+'\n'
-                + '- !tsound "effect_száma"  =  Lejátszasz egy hang effectet.'+'\n'
-                + '- !taranyköpés  =  Random aranyköpést küld neked a bot.'+'\n'
-                + '- !kifogás  =  Dob egy random kifogást hogy kihúzd magad a pácból.');
-    }
-    // Inaktív
+        const embed = new Discord.MessageEmbed()
+          .setTitle('🚂  Itt megtalálsz minden parancsot Thomashoz  🚂')
+          .setAuthor('Thomas a hősmozdony')
+          .setDescription('Vannak parancsoka amelyek státus jelentők vagy még nem aktívak. \n Ezeknél egy "❌" található! \n Minden elérhető parancsnál található egy "✅" -jel ! \n'+"‎‎‎‎‎‎")
+          .setColor('#33ccff')
+          .setImage('https://media.port.hu/images/000/309/542.jpg')
+          .setFooter('Amennyiben bugot vagy működés képtelen parancsot észlelsz kérlek vedd fel velem a kapcsolatot. \n Ezzel is segítve a fejlesztést : Csaba1999#0767 . Esetleg csekkold Thomasz állapotát a !tstatus parancsal.')
+          .addFields({
+            name: '✅ !thomashelp ',
+            value: 'Előhozza a parancs listát.'
+          }, {
+            name: '✅ !oltás',
+            value: 'Thomas beszól neked valamit.'
+          }, {
+            name: '✅ !hullámvasút @username',
+            value: 'Felültetsz vele valakit Thomasra. \n Ezzel feébreszted őt álmából !'
+          }, {
+            name: '❌ !tsoundlist',
+            value: 'Előhozza a jelenleg elérhető hangeffecteket.'
+          }, {
+            name: '❌ !tsound "0"',
+            value: 'Thomas belép hozzátok és bejátszik egy mémet.'
+          }, {
+            name: '✅ !aranyköpés',
+            value: 'Thomas Random aranyköpést küld neked.'
+          }, {
+            name: '✅ !tkifogás',
+            value: 'Thomas ad neked egy random kifogást hogy kihúzd magadat a pácból.'
+          }, {
+            name: '✅ !status',
+            value: 'Ellenörzöd Thomas állapotát.'
+          })
+          .setTimestamp();
+
+        message.channel.send(embed);
+      }
+    //-----------------------------------*KIFOGÁS*---------------------------------------
     if (message.content === '!kifogás') {
         const oltasok = [
-            "-------------------------------------------------------------- \n Fent marasztottatok 2-ig, és ezért nem tudok játszani. \n --------------------------------------------------------------",
-            "------------------------------------------------------- \n Nem látok semmit, meg kell mosnom az arcom. \n -------------------------------------------------------"
+            "Engem már nem érdekel az egész",
+            "Dani csak pofázik, csak pofázik folyamatosan",
+            "Reaction timeoztam",
+            "Szerintem azt hajnalban írtam, és már fáradt voltam",
+            "Ajj, de ez egy gold geci",
+            "Én a diamondot lefosom, de ezek szilverek…",
+            "Nem látok semmit, meg kell mosnom az arcom.",
+            "Fent marasztottatok 2-ig, és ezért nem tudok játszani.",
+            "De teljesen le van fagyva a kezem bazd meg."
         ];
-        var kifR = Math.floor(Math.random() * 2);
-        message.channel.send(oltasok[kifR] + "");
+        var oltTH = oltasok.length;
+        var oltIndex = Math.floor(Math.random() * oltTH);
+        message.channel.send(oltasok[oltIndex]);
     }
-    
-    if (message.content === '!thomasoltás') {
+    //*******************************************0*****************************************
+    //
+    //  
+    //
+    //
+    if (message.content === '!aranyköpés') {
+        const oltasok = [
+            " Impactal lelő - Orange, 2020.09.29.",
+            " Én most csapat ember leszek - Tibi, 2020.11.04",
+            " Hogy nem lehet betalálni egy fél kilós gránáttal egy 120x120-as ablakon??? - Peki, dátum ismeretlen",
+            " A breach ki van nyitva - Tibo, 2020.11.08",
+            " Honnan lőttek le Tibi? \n Tibi: Jager, 50-es \n 2020.11.12",
+            " Megdobálom őket mute jammerrel! Sőti: 2020.11.19.",
+            " Ha rajtam múlott volna, megnéztem volna, de nem néztem meg mert nem volt kedvem. \n Rajtam múlott hogy nem néztem meg nem? De. \n Nem néztem meg mert nem volt kedvem rajtam múlott. Tibi - 2020.11.20.",
+            " 5 mondatot kell írnom a piramis tornyokról Tibi, 2020.11.26.",
+            " Tibi: Fuck you mothers 2020.11.29.",
+            " Dano: Pill megyek arcot mosni. \n Sőti: Mi a fasznak? \n Dano: Mert le vagyok izzadva, nem látok semmit. 2020.11.29",
+            " Sőti: A doboza megvan még? \n Tibi: Kurva nagy doboza van.",
+            " Csabi: Nem leanelhetsz, de cserébe glaz-t kell hoznod",
+            " Tibi: A bish barbi még néz is ki valahogyan ( transz nő ) \n Tibi: A hamza alex az nem annyira ( buzi ) 2020.12.07.",
+            " Kéne nekem egy nem 3000ft-os asztalpad. Tibi, 2020.12.11",
+            " Nolife: lehugyozom a diát is, de ezek silverek",
+            " Dani: Nekem 3060 vagy 3060 kell amit most mondtál. \n Csabi: Na hát az csak olyan 150k \n Dani: Na az fasza, hogy kell leírni?",
+            " Coli:Ezek copperek.Nem főzik meg",
+            " Csabi: De az a legjobb bazd meg amikor a fogyatékosok szidják a fogyatékosokat bazd \n meg: höhöhö nézd már neki csak fél karja van! Neked meg nincsen lábad bazd meg. Ti, Ti  \n ketten ez a kategóra vagytok.",
+            " Sőti: 1992-es a film \n Dani: De akkor hogy láthattam ha 2003-as vagyok??",
+            " Dani: Hogy haltam meg???!! \n Dani:(Áll a termit charge mellett....)",
+            " 8 giga ramot semmi nem fog elhasználni mert borzasztó sok, fölösleges ilyen sok ramot \n belerakni mert úgy se használja ki semmit max 1-2 speciális játék. - Coli gyökér tanára",
+            " Tibi: Sorry kidobtak rám egy C4-et . Valamit vissza kellet dobnom.",
+            " Dani: Ijj Tibi mi volt az a recoil? \n Tibi: Bocsi csak fél kézzel fogtam az egeret",
+            " Peti: Attackert akarok venni, milyen attackert vegyek szerinted? Ela jó?",
+            " Sőti: Ez a red silk ez kinek tetszik egyáltalán? Hát ez valami borzalom. \n Csabi: Tibinek. Hát nem láttad? Rezgett tőle a keze.",
+            " Sőti: A gyerek csak ül ott azzal a bágyor képével.",
+            " Csabi: Jó kis kávét hörcsölni, vagy várjál, szörcsölni.",
+            " Tibi: Erről sóse lehet!",
+            " Tibi: Köszi hogy felszedtél <3. \n Tibi: (Le TK-zik random lövöldözés közben.)",
+            " Dani:Miért nem úszik a víz a halban?"
+        ];
+        var oltTH = oltasok.length;
+        var oltIndex = Math.floor(Math.random() * oltTH);
+        message.channel.send(oltasok[oltIndex]);
+    }
+    //-------------------------------*STATUS*---------------------------------------------  
+    if (message.content === '!tstatus') {
+        message.channel.send("Jelenlegi státusz : (ONLINE) 'Thomas működik!' .");
+        message.channel.send("Modulok : MISSING_CODE/" + "MISSING_CODE");
+        message.channel.send("REPORT : Ha a státusz : (ONLINE) akkor működik a bot. Ha mégse, vedd fel velem a kapcsolatot : Csaba1999#0767");
+    }
+    //************************************************************************************
+    //
+    //  
+    //---------------------------------*OLTÁS*------------------------------------------  
+    if (message.content === '!oltás') {
         const oltasok = ["Mi kéne te fasz?",
             "Hadjá má lógva " + message.author.username + " baszod",
             "Még egy ilyen és banollak!",
@@ -48,59 +132,72 @@ client.on('message', async message => {
         var oltR = Math.floor(Math.random() * 12);
         message.channel.send(oltasok[oltR] + "");
     }
-    // sound effect menü (inaktív)
+    //************************************************************************************
+    //
+    //    
+    //---------------------------------SOUND LIST---------------------------------------  
     if (message.content === '!tsoundlist') {
-        message.channel.send('1 - bruhh ' + '\n'
-                + '2 - oh no' + '\n'
-                + '3 - no god' + '\n'
-                + '4 - why are you runnin' + '\n'
-                + '5 - dam boy');
+        message.channel.send(
+            '//A teljes lista inaktív ! (Fejlesztés alatt)' + '\n'
+            + '1 - bruhh ' + '\n'
+            + '2 - oh no' + '\n'
+            + '3 - no god' + '\n'
+            + '4 - why are you runnin' + '\n'
+            + '5 - dam boy');
     }
-    //effect lejátszása (inaktí)
+    //************************************************************************************ 
+    //
+    //
+    //----------------------------------SOUND EFFECT------------------------------------  
     if (message.content === '!tsound 1') {
         message.channel.send('Fejlesztés alatt');
     }
-    // emberek mozgatása !hullámvasút @username
+    //-************************************************************************************
+    //
+    //  
+    //--------------------------------------HULLÁMVASÚT---------------------------------  
     var args = message.content.split(' ');
     if (args[0] === '!hullámvasút') {
         const muteduser = message.mentions.members.first();
         const defaultchannel = muteduser.voice.channel;
         if (muteduser.voice.selfMute || muteduser.voice.serverDeaf) {
-            message.guild.channels.create('SI', {type: 'voice'})
-                    .then(uc1 => {
-                        message.guild.channels.create('HUHU', {type: 'voice'})
-                                .then(uc2 => {
-                                    unmutefc(uc1, uc2, defaultchannel, muteduser);
-                                    function unmutefc(uc1, uc2, defaultchannel, muteduser) {
-                                        if (muteduser.voice.selfMute || muteduser.voice.serverDeaf) {
-                                            muteduser.voice.setChannel(uc1);
-                                            muteduser.voice.setChannel(uc2);
-                                            setTimeout(() => {
-                                                unmutefc(uc1, uc2, defaultchannel, muteduser);
-                                            }, 3000);
-                                        } else {
-                                            muteduser.voice.setChannel(defaultchannel);
-                                            uc1.delete();
-                                            uc2.delete();
-                                        }
-                                    }
-                                });
-                    });
+            message.guild.channels.create('SI', { type: 'voice' })
+                .then(uc1 => {
+                    message.guild.channels.create('HUHU', { type: 'voice' })
+                        .then(uc2 => {
+                            unmutefc(uc1, uc2, defaultchannel, muteduser);
+                            function unmutefc(uc1, uc2, defaultchannel, muteduser) {
+                                if (muteduser.voice.selfMute || muteduser.voice.serverDeaf) {
+                                    muteduser.voice.setChannel(uc1);
+                                    muteduser.voice.setChannel(uc2);
+                                    setTimeout(() => {
+                                        unmutefc(uc1, uc2, defaultchannel, muteduser);
+                                    }, 3500);
+                                } else {
+                                    muteduser.voice.setChannel(defaultchannel);
+                                    uc1.delete();
+                                    uc2.delete();
+                                }
+                            }
+                        });
+                });
 
 
         }
     }
 });
 
-
-
-
-
-//previus token is regenerated.
-client.login("Bot token");
-
-//--------------------------------------------
-//OFFICAL BOT! V1.0
+//----------------------------------TOKEN---------------------------------------  
+//
+console.log('Loading...');
+client.login('');
+console.log('Status : ONLINE');
+console.log('Modulok : MISSING_CODE/MISSING_CODE');
+//************************************************************************************
+//
+//
+//-------------------LOG-------------------
+//OFFICAL BOT! V1.0.5
 //STATUS = READY TO START
 //ÁLLAPOT PRIVÁT!
 //PUBLIC VERZÓ VÁRHATÓAN 3 - 4 HÓNAP
@@ -117,7 +214,7 @@ client.login("Bot token");
 TO DO:
 -soud effect
 -moderátor
--menü GUI 
+-menü GUI
 -spam bug fix
 -Ranghoz kötés
 -random aranyköpés
@@ -126,5 +223,7 @@ TO DO:
 -user left the voice channels hiba javitása
 -errorok minimalizálása.
 -tartalom bővítés
+-status massege
  */
 //--------------------------------------------
+

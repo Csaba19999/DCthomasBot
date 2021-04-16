@@ -1,1 +1,0 @@
-/\P{Script=Hiragana}/u

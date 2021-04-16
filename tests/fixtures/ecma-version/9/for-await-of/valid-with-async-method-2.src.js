@@ -1,1 +1,0 @@
-class A { async f() { for await (x of xs); } }

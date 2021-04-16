@@ -1,3 +1,0 @@
-try {
-    foo()
-} catch bar();

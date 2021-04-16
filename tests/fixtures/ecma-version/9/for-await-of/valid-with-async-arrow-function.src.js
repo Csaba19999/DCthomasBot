@@ -1,1 +1,0 @@
-f = async() => { for await (x of xs); }
