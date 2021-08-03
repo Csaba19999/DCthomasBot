@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/opus": "^0.5.0",
     "discord.js": "^12.5.3",
+    "ffmpeg-static": "^4.3.0",
     "nodebb-widget-discord-embed": "^1.0.0"
   },
   "devDependencies": {

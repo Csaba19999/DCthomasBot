@@ -1,12 +1,13 @@
 ﻿
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { Client, CategoryChannel, MessageEmbed } = require("discord.js")
+const { Client, CategoryChannel, MessageEmbed } = require("discord.js");
+const { lastIndexOf } = require('ffmpeg-static');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
-client.on('message', message => {
+client.on('message',async message => {
 
 
     //----------------------------------*HELP*--------------------------------------------  
@@ -28,10 +29,10 @@ client.on('message', message => {
             name: '✅ !hullámvasút @username',
             value: 'Felültetsz vele valakit Thomasra. \n Ezzel feébreszted őt álmából !'
           }, {
-            name: '❌ !tsoundlist',
+            name: '✅ !tsoundlist',
             value: 'Előhozza a jelenleg elérhető hangeffecteket.'
           }, {
-            name: '❌ !tsound "0"',
+            name: '✅ !tsound "0"',
             value: 'Thomas belép hozzátok és bejátszik egy mémet.'
           }, {
             name: '✅ !aranyköpés',
@@ -51,14 +52,10 @@ client.on('message', message => {
     if (message.content === '!kifogás') {
         const kifogasok = [
             "Engem már nem érdekel az egész!",
-            "Dani csak pofázik, csak pofázik folyamatosan!",
             "Reaction timeoztam!",
             "Szerintem azt hajnalban írtam, és már fáradt voltam.",
-            "Ajj, de ez egy gold geci !",
-            "Én a diamondot lefosom, de ezek szilverek…",
             "Nem látok semmit, meg kell mosnom az arcom.",
-            "Fent marasztottatok 2-ig, és ezért nem tudok játszani.",
-            "De teljesen le van fagyva a kezem bazd meg."
+            "Fent marasztottatok 2-ig, és ezért nem tudok játszani."
         ];
 
         //KIIRATÁS
@@ -87,19 +84,16 @@ client.on('message', message => {
             " Megdobálom őket mute jammerrel! Sőti: 2020.11.19.",
             " Ha rajtam múlott volna, megnéztem volna, de nem néztem meg mert nem volt kedvem. \n Rajtam múlott hogy nem néztem meg nem? De. \n Nem néztem meg mert nem volt kedvem rajtam múlott. Tibi - 2020.11.20.",
             " 5 mondatot kell írnom a piramis tornyokról Tibi, 2020.11.26.",
-            " Tibi: Fuck you mothers 2020.11.29.",
-            " Dano: Pill megyek arcot mosni. \n Sőti: Mi a fasznak? \n Dano: Mert le vagyok izzadva, nem látok semmit. 2020.11.29",
-            " Sőti: A doboza megvan még? \n Tibi: Kurva nagy doboza van.",
+            " Dano: Pill megyek arcot mosni. \n Sőti: Minek? \n Dano: Mert le vagyok izzadva, nem látok semmit. 2020.11.29",
+            " Sőti: A doboza megvan még? \n Tibi: K#!?va nagy doboza van.",
             " Csabi: Nem leanelhetsz, de cserébe glaz-t kell hoznod",
-            " Tibi: A bish barbi még néz is ki valahogyan ( transz nő ) \n Tibi: A hamza alex az nem annyira ( buzi ) 2020.12.07.",
+            " Tibi: A bish barbi még néz is ki valahogyan ( transz nő ) \n Tibi: A hamza alex az nem annyira ( meleg férfi ) 2020.12.07.",
             " Kéne nekem egy nem 3000ft-os asztalpad. Tibi, 2020.12.11",
-            " Nolife: lehugyozom a diát is, de ezek silverek",
-            " Dani: Nekem 3060 vagy 3060 kell amit most mondtál. \n Csabi: Na hát az csak olyan 150k \n Dani: Na az fasza, hogy kell leírni?",
+            " Dani: Nekem 3060 vagy 3060 kell amit most mondtál. \n Csabi: Na hát az csak olyan 150k \n Dani: Na az jó, hogy kell leírni?",
             " Coli:Ezek copperek.Nem főzik meg",
-            " Csabi: De az a legjobb bazd meg amikor a fogyatékosok szidják a fogyatékosokat bazd \n meg: höhöhö nézd már neki csak fél karja van! Neked meg nincsen lábad bazd meg. Ti, Ti  \n ketten ez a kategóra vagytok.",
-            " Sőti: 1992-es a film \n Dani: De akkor hogy láthattam ha 2003-as vagyok??",
+            " Sőti: 1992-es a film \n Dani: De akkor hogy láthattam ha 2003-as vagyok?",
             " Dani: Hogy haltam meg???!! \n Dani:(Áll a termit charge mellett....)",
-            " 8 giga ramot semmi nem fog elhasználni mert borzasztó sok, fölösleges ilyen sok ramot \n belerakni mert úgy se használja ki semmit max 1-2 speciális játék. - Coli gyökér tanára",
+            " 8 giga ramot semmi nem fog elhasználni mert borzasztó sok, fölösleges ilyen sok ramot \n belerakni mert úgy se használja ki semmit max 1-2 speciális játék. - Coli tanára",
             " Tibi: Sorry kidobtak rám egy C4-et . Valamit vissza kellet dobnom.",
             " Dani: Ijj Tibi mi volt az a recoil? \n Tibi: Bocsi csak fél kézzel fogtam az egeret",
             " Peti: Attackert akarok venni, milyen attackert vegyek szerinted? Ela jó?",
@@ -108,7 +102,7 @@ client.on('message', message => {
             " Csabi: Jó kis kávét hörcsölni, vagy várjál, szörcsölni.",
             " Tibi: Erről sóse lehet!",
             " Tibi: Köszi hogy felszedtél <3. \n Tibi: (Le TK-zik random lövöldözés közben.)",
-            " Dani:Miért nem úszik a víz a halban?"
+            " Dani: Miért nem úszik a víz a halban?"
         ];
 
         //KIIRATÁS
@@ -125,27 +119,22 @@ client.on('message', message => {
     }
     //-------------------------------*STATUS*---------------------------------------------  
     if (message.content === '!tstatus') {
-        message.channel.send("Jelenlegi státusz : ONLINE' .");
-        message.channel.send("Modulok : MISSING_CODE/" + "MISSING_CODE");
-        message.channel.send("REPORT : ( Ha a státusz : ONLINE akkor működik a bot. Ha mégse, vedd fel velem a kapcsolatot : Csaba1999#0767 )");
+        message.channel.send("Jelenlegi státusz : ONLINE");
+        message.channel.send("REPORT : ( Ha a státusz : ONLINE akkor működik a bot. Ha mégis lenne funkció ami nem elérhető vedd fel velem a kapcsolatot discordon : Csaba1999#0767 )");
     }
     //************************************************************************************
     //
     //  
     //---------------------------------*OLTÁS*------------------------------------------  
     if (message.content === '!oltás') {
-        const oltasok = ["Mi kéne te fasz?",
-            "Hadjá má lógva " + message.author.username + " baszod",
+        const oltasok = [
+            "Hadjá má lógva " + message.author.username + " légyszives...",
             "Még egy ilyen és banollak!",
-            message.author.username + " Te faszkalap....",
+            message.author.username + " Te .. Te kis teeeee",
             message.author.username + " Vonatozni akarsz? felöllem mehet.",
             "Nem hiszem el hogy ennyire... áh.. ki se mondom.",
             "Egy verébnek több esze van mint neked!",
-            message.author.username + " gyere vonatozni velünk te kis hombár homár.",
-            message.author.username + " Ki ez az NBER?!",
-            message.author.username + " -Szóljak anyádnak?",
-            message.author.username + " Anyád már tudja hogy buzi vagy?",
-            "De az nem úgy van " + message.author.username + " istenem na , kérlek"
+            message.author.username + " Anyukád tudja miket írogatsz ide?",
         ];
 
         //KIIRATÁS
@@ -164,21 +153,60 @@ client.on('message', message => {
     //    
     //---------------------------------SOUND LIST---------------------------------------  
     if (message.content === '!tsoundlist') {
-        message.channel.send(
-            '//A teljes lista inaktív ! (Fejlesztés alatt)' + '\n'
-            + '1 - bruhh ' + '\n'
-            + '2 - oh no' + '\n'
-            + '3 - no god' + '\n'
-            + '4 - why are you runnin' + '\n'
-            + '5 - dam boy');
+      const embed = new Discord.MessageEmbed()
+          .setTitle('🚂  Effectek listája  🚂')
+          .setAuthor('Thomas a hősmozdony')
+          .setDescription('Az itt található parancsal és számokkal lejátszhato az effectet a barátaidnak.'+"‎‎‎‎‎‎")
+          .setColor('#33ccff')
+          .setFooter('Hiba esetén használd a (!tstatus)-parancsot vagy fordulj hozzám : Csaba1999#0767')
+          .addFields({
+            name: '!tsound 1',
+            value: 'bruhh',
+            inline:true
+          }, {
+            name: '!tsound 2',
+            value: 'No god pleas no',
+            inline:true
+          }, {
+            name: '!tsound 3',
+            value: 'Oh shit not Good',
+            inline:true
+          }, {
+            name: '!tsound 4',
+            value: 'Why are you running',
+            inline:true
+          }, {
+            name: '!tsound ...',
+            value: 'Bővítés a jövőben',
+            inline:true
+          }, {
+            name: '!tsound ...',
+            value: 'Bővítés a jövőben',
+            inline:true
+          })
+          .setTimestamp();
+
+        message.channel.send(embed);
+        
     }
     //************************************************************************************ 
     //
     //
-    //----------------------------------SOUND EFFECT------------------------------------  
-    if (message.content === '!tsound 1') {
-        message.channel.send('Fejlesztés alatt');
-    }
+    //----------------------------------SOUND EFFECT------------------------------------ 
+    var effectTomb = ['Bruh Sound Effect #2.mp3',
+                    'No God please no Sound effect.mp3',
+                    'oh shit not Good ! sound effect no copyright..mp3',
+                    'Why Are You Running - Sound Effect (HD).mp3'
+
+    ];
+    var soundfCommand = message.content;
+      if (message.content.includes('!tsound'+' ')) {
+        var soundIndex = message.content.slice(-1);
+        if (!message.member.voice.channel) return message.reply("Ehez a parancshoz benne kell lenned egy szobában!");
+          if (message.guild.me.voice.channel) return message.reply("Eggyszerre csak 1 effect");
+              message.member.voice.channel.join().then(VoiceConnection => {
+                VoiceConnection.play("./MP3/"+effectTomb[soundIndex-1]).on("finish", () => VoiceConnection.disconnect());
+              }).catch(e => console.log(e))};
     //-************************************************************************************
     //
     //  
@@ -199,8 +227,9 @@ client.on('message', message => {
                                     muteduser.voice.setChannel(uc2);
                                     setTimeout(() => {
                                         unmutefc(uc1, uc2, defaultchannel, muteduser);
-                                    }, 3500);
+                                    }, 3000);
                                 } else {
+                                    setTimeout(1000);
                                     muteduser.voice.setChannel(defaultchannel);
                                     uc1.delete();
                                     uc2.delete();
@@ -212,6 +241,14 @@ client.on('message', message => {
 
         }
     }
+
+    //---------------------------------------------TEST-------------------------------------------------
+    // counter adatbázis nélkül
+
+    // Újdonság amit tanultam a bot készítése alatt :
+    // var : változó , változtatható az értéke, többször is és szinte bármire módosítható. modulokból is módosíthatóak valamit eggyikből a másikba is átvihető az értéke
+    // let : változó ,modulokban képes csak mozogni. értéke átírható változtatható , viszont csak is a cél modulban funkcionál.
+    // const : Lényegében egy globális változó. az értéke fix modulokban nem is éri meg használni inkább mindenre kiterjedően a mainben.
 });
 
 //----------------------------------TOKEN---------------------------------------  
@@ -219,12 +256,11 @@ client.on('message', message => {
 console.log('Loading...');
 client.login('');
 console.log('Status : ONLINE');
-console.log('Modulok : MISSING_CODE/MISSING_CODE');
 //************************************************************************************
 //
 //
 //-------------------LOG-------------------
-//OFFICAL BOT! V1.0.5
+//OFFICAL BOT! V1.0.9
 //STATUS = READY TO START
 //ÁLLAPOT PRIVÁT!
 //PUBLIC VERZÓ VÁRHATÓAN 3 - 4 HÓNAP
@@ -235,23 +271,21 @@ console.log('Modulok : MISSING_CODE/MISSING_CODE');
 //      DISCORD.JS 12.+
 //HOST
 //      https://billing.plox.host/clientarea.php
-//      pass:50/70 A többi fejben
-//      https://discord.com/api/oauth2/authorize?client_id=830753364466991125&permissions=4294966704&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
 //--------------------------------------------
 /*
 TO DO:
--soud effect
 -moderátor
--menü GUI
--spam bug fix
 -Ranghoz kötés
--random aranyköpés
--kifogás kártya
--időzítő finom hangolása + 1 szoba
+-időzítő finom hangolása + 1 szoba + havalaki elhagyja a szervert ne tartsa meg a szobákatz
+-ha valaki elhagyja a szerver a szobákat megtartja
 -user left the voice channels hiba javitása
--errorok minimalizálása.
--tartalom bővítés
--status massege
+-errorok minimalizálása.-
  */
 //--------------------------------------------
+//DONE:
+//-menü GUI
+//-random aranyköpés
+//-kifogás kártya
+//-status massege
+//-spam bug fix
 
