@@ -13,36 +13,45 @@ client.on('message',async message => {
     //----------------------------------*HELP*--------------------------------------------  
     if (message.content === '!thomashelp') {
         const embed = new Discord.MessageEmbed()
-          .setTitle('🚂  Itt megtalálsz minden parancsot Thomashoz  🚂')
+          .setTitle('🚂   Itt megtalálsz minden parancsot Thomashoz   🚂')
           .setAuthor('Thomas a hősmozdony')
           .setDescription('Vannak parancsoka amelyek státus jelentők vagy még nem aktívak. \n Ezeknél egy "❌" található! \n Minden elérhető parancsnál található egy "✅" -jel ! \n'+"‎‎‎‎‎‎")
           .setColor('#33ccff')
           .setImage('https://media.port.hu/images/000/309/542.jpg')
           .setFooter('Amennyiben bugot vagy működés képtelen parancsot észlelsz kérlek vedd fel velem a kapcsolatot. \n Ezzel is segítve a fejlesztést : Csaba1999#0767 . Esetleg csekkold Thomasz állapotát a !tstatus parancsal.')
           .addFields({
-            name: '✅ !thomashelp ',
+            name: '✅  !thomashelp ',
             value: 'Előhozza a parancs listát.'
           }, {
-            name: '✅ !oltás',
+            name: '✅  !oltás',
             value: 'Thomas beszól neked valamit.'
           }, {
-            name: '✅ !hullámvasút @username',
+            name: '✅  !hullámvasút @username',
             value: 'Felültetsz vele valakit Thomasra. \n Ezzel feébreszted őt álmából !'
           }, {
-            name: '✅ !tsoundlist',
+            name: '✅  !tsoundlist',
             value: 'Előhozza a jelenleg elérhető hangeffecteket.'
           }, {
-            name: '✅ !tsound "0"',
-            value: 'Thomas belép hozzátok és bejátszik egy mémet.'
+            name: '✅  !tsound "0"',
+            value: 'Thomas belép hozzátok és bejátszik egy mémet. (Az "" -nem szükséges)'
           }, {
-            name: '✅ !aranyköpés',
+            name: '✅  !aranyköpés',
             value: 'Thomas Random aranyköpést küld neked.'
           }, {
-            name: '✅ !kifogás',
+            name: '✅  !kifogás',
             value: 'Thomas ad neked egy random kifogást hogy kihúzd magadat a pácból.'
           }, {
-            name: '✅ !tstatus',
+            name: '✅  !tstatus',
             value: 'Ellenörzöd Thomas állapotát. Ha nem kapsz választ az azt jelenti hogy offline van.'
+          }, {
+            name: '❌  !addsound "YouTube Link" "Effect neve" ',
+            value: 'Adj hozzá új hangeffektet a szerveredhez, amit Thomas lejátszik neked! \n(Az effekteket csak azon a szerveren lehet lejátszani amelyiken hozzá adtad. Az "" -nem szükséges. Maximális hossz 10mp)'
+          }, {
+            name: '❌  !votetokick @username',
+            value: 'Szavazást indíthatsz valakinek a kirugására aki toxikus. \nSzabályrendszer fejlesztés alatt.'
+          }, {
+            name: 'Hívd meg Thomast a saját vagy egy barátod szerverére a linken keresztül.',
+            value: 'Link: https://discord.com/api/oauth2/authorize?client_id=830753364466991125&permissions=261993004530&redirect_uri=https%3A%2F%2Fdiscord.com%2Fapi%2Foauth2%2Fauthorize&scope=bot'
           })
           .setTimestamp();
 
@@ -117,10 +126,34 @@ client.on('message',async message => {
         message.channel.send(embedU);
 
     }
-    //-------------------------------*STATUS*---------------------------------------------  
+    //-------------------------------*STATUS*---------------------------------------------
+    
     if (message.content === '!tstatus') {
-        message.channel.send("Jelenlegi státusz : ONLINE");
-        message.channel.send("REPORT : ( Ha a státusz : ONLINE akkor működik a bot. Ha mégis lenne funkció ami nem elérhető vedd fel velem a kapcsolatot discordon : Csaba1999#0767 )");
+      var AktiSzerver = [];
+      client.guilds.cache.forEach(guild => {
+        AktiSzerver.push(guild.id); //(`${guild.name} | ${guild.id}`)
+      })
+        const embed = new Discord.MessageEmbed()
+          .setTitle('⚙️  STÁTUSZ  ⚙️')
+          .setDescription('Ha a státusz ONLINE akkor működik a bot. Ha mégis lenne funkció ami nem elérhető vedd fel velem a kapcsolatot discordon : Csaba1999#0767')
+          .setColor('#33ccff')
+          .addFields({
+            name: 'Státusz :',
+            value: 'ONLINE',
+            inline:true
+          }, {
+            name: 'Thomas jelenleg ennyi szerveren van jelen :',
+            value: AktiSzerver.length,
+            inline:true
+          }, {
+            name: 'Verzió : ',
+            value: "1.0 V \nThomas immáron készenáll a megjelenésre!\nRengeteg hiba lett javítva\nés rengeteg újítás lett hozzá adva.",
+            inline:true
+          })
+          .setTimestamp();
+
+        message.channel.send(embed);
+        
     }
     //************************************************************************************
     //
@@ -154,7 +187,7 @@ client.on('message',async message => {
     //---------------------------------SOUND LIST---------------------------------------  
     if (message.content === '!tsoundlist') {
       const embed = new Discord.MessageEmbed()
-          .setTitle('🚂  Effectek listája  🚂')
+          .setTitle('🚂   Effectek listája   🚂')
           .setAuthor('Thomas a hősmozdony')
           .setDescription('Az itt található parancsal és számokkal lejátszhato az effectet a barátaidnak.'+"‎‎‎‎‎‎")
           .setColor('#33ccff')
@@ -216,6 +249,7 @@ client.on('message',async message => {
         const muteduser = message.mentions.members.first();
         const defaultchannel = muteduser.voice.channel;
         if (muteduser.voice.selfMute || muteduser.voice.serverDeaf) {
+          message.channel.send(args[1]+" felült a hullámvasútra!");
             message.guild.channels.create('SI', { type: 'voice' })
                 .then(uc1 => {
                     message.guild.channels.create('HUHU', { type: 'voice' })
@@ -228,27 +262,29 @@ client.on('message',async message => {
                                     setTimeout(() => {
                                         unmutefc(uc1, uc2, defaultchannel, muteduser);
                                     }, 3000);
-                                } else {
-                                    setTimeout(1000);
+                                } else if(!muteduser.voice.selfMute || !muteduser.voice.serverDeaf) {
+                                  setTimeout(() => {
                                     muteduser.voice.setChannel(defaultchannel);
                                     uc1.delete();
                                     uc2.delete();
+                                }, 3000);
+                                } else {
+                                  setTimeout(() => {
+                                    !muteduser.voice.setChannel(defaultchannel);
+                                    uc1.delete();
+                                    uc2.delete();
+                                }, 3000);
                                 }
                             }
                         });
                 });
 
-
+        } else {
+          message.channel.send(message.author.username+" Csak némított emberek ülhetnek fel a vasútra!")
         }
     }
 
-    //---------------------------------------------TEST-------------------------------------------------
-    // counter adatbázis nélkül
 
-    // Újdonság amit tanultam a bot készítése alatt :
-    // var : változó , változtatható az értéke, többször is és szinte bármire módosítható. modulokból is módosíthatóak valamit eggyikből a másikba is átvihető az értéke
-    // let : változó ,modulokban képes csak mozogni. értéke átírható változtatható , viszont csak is a cél modulban funkcionál.
-    // const : Lényegében egy globális változó. az értéke fix modulokban nem is éri meg használni inkább mindenre kiterjedően a mainben.
 });
 
 //----------------------------------TOKEN---------------------------------------  
@@ -256,36 +292,41 @@ client.on('message',async message => {
 console.log('Loading...');
 client.login('');
 console.log('Status : ONLINE');
-//************************************************************************************
-//
-//
-//-------------------LOG-------------------
-//OFFICAL BOT! V1.0.9
-//STATUS = READY TO START
-//ÁLLAPOT PRIVÁT!
-//PUBLIC VERZÓ VÁRHATÓAN 3 - 4 HÓNAP
-//
-//VERZIÓK: 
-//      NODE.JS 14.+
-//      EREREE.JS 14.+
-//      DISCORD.JS 12.+
-//HOST
-//      https://billing.plox.host/clientarea.php
-//--------------------------------------------
+
+
+
 /*
+************************************************************************************
+
+
+-------------------LOG-------------------
+OFFICAL BOT! Beta V1.1.0
+STATUS = READY TO START
+ÁLLAPOT PRIVÁT!
+
+VERZIÓK: 
+      NODE.JS 14.+
+      EREREE.JS 14.+
+      DISCORD.JS 12.+
+HOST
+      https://billing.plox.host/clientarea.php
+--------------------------------------------
+
 TO DO:
 -moderátor
 -Ranghoz kötés
+-errorok minimalizálása.
+
+DONE:
+-menü GUI
+-random aranyköpés
+-kifogás kártya
+-status massege
+-spam bug fix
 -időzítő finom hangolása + 1 szoba + havalaki elhagyja a szervert ne tartsa meg a szobákatz
 -ha valaki elhagyja a szerver a szobákat megtartja
 -user left the voice channels hiba javitása
--errorok minimalizálása.-
- */
-//--------------------------------------------
-//DONE:
-//-menü GUI
-//-random aranyköpés
-//-kifogás kártya
-//-status massege
-//-spam bug fix
+API VÁLTOZÁS SZOBÁT TÖRÖLNIE KELL  A BOTNAK
 
+
+ */
